@@ -6,6 +6,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.vue$/, loader: 'vue' },
+            { test:/\.less$/, loader: 'style!css!less' }
         ]
     }
 }

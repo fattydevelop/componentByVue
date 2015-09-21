@@ -5,16 +5,18 @@
 </style>
 
 <template>
+  <vheader></vheader>
   <h1 class="red">{{msg}}</h1>
-   <a v-link="{ path: '/foo' }">Go to Foo</a>
-
 </template>
 <script>
   module.exports = {
     data: function () {
       return {
-        msg: 'Hello worrrrrld!'
+        msg: 'Hello 中文!'
       }
+    },
+    components:{
+        vheader:require('./components/v-header.vue')
     }
   }
 </script>
