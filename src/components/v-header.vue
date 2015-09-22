@@ -51,12 +51,10 @@
 <script>
   module.exports = {
     data: function () {
-    return {
-      logoSrc:'http://www.easyicon.net/api/resizeApi.php?id=1126395&size=128',
-      headerTitle:'vue&bootstrap',
-      userName:'哈哈',
-      userIdentity:'管理员'
-    }
-  }
+      return {
+
+      }
+    },
+    props:['logoSrc','headerTitle','userName','userIdentity']
   }
 </script>
