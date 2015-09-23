@@ -1,6 +1,5 @@
 <style lang="less">
   @import '../main.less';
-  @import url(http://fonts.googleapis.com/css?family=Raleway:400,200);
   #cssmenu,
   #cssmenu ul,
   #cssmenu ul li,
@@ -18,33 +17,70 @@
   }
   #cssmenu {
     width: 220px;
-    font-family: Raleway, sans-serif;
+
     color: #ffffff;
   }
   #cssmenu ul ul {
     display: none;
   }
-  #cssmenu > ul > li.active > ul {
-    display: block;
-  }
+
   .align-right {
     float: right;
   }
-  #cssmenu > ul > li > a {
-    padding: 16px 22px;
-    cursor: pointer;
-    z-index: 2;
-    font-size: 16px;
-    text-decoration: none;
-    color: #ffffff;
-    background: #3ab4a6;
-    -webkit-transition: color .2s ease;
-    -o-transition: color .2s ease;
-    transition: color .2s ease;
+  #cssmenu{
+    ul{
+        li{
+            a{
+                padding: 16px 22px;
+                cursor: pointer;
+                z-index: 2;
+                font-size: 16px;
+                text-decoration: none;
+                color: #ffffff;
+                background: #3ab4a6;
+                -webkit-transition: color .2s ease;
+                -o-transition: color .2s ease;
+                transition: color .2s ease;
+            }
+            a:hover{
+                 color: #d8f3f0;
+            }
+            a:active{
+                ul{
+                    color:red;
+                }
+            }
+        }
+
+        ul{
+            li{
+                a{
+                        padding: 14px 22px;
+                        cursor: pointer;
+                        z-index: 2;
+                        font-size: 14px;
+                        text-decoration: none;
+                        color: #dddddd;
+                        background: #49505a;
+                        -webkit-transition: color .2s ease;
+                        -o-transition: color .2s ease;
+                        transition: color .2s ease;
+                }
+            }
+            ul{
+                li{
+                    a{
+                        padding-left: 32px;
+                     }
+                     a:hover{
+                        color: #ffffff;
+                     }
+                }
+            }
+        }
+    }
   }
-  #cssmenu > ul > li > a:hover {
-    color: #d8f3f0;
-  }
+
   #cssmenu ul > li.has-sub > a:after {
     position: absolute;
     right: 26px;
@@ -76,6 +112,7 @@
     -o-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
   }
+
   #cssmenu ul > li.has-sub.open > a:after,
   #cssmenu ul > li.has-sub.open > a:before {
     -webkit-transform: rotate(45deg);
@@ -84,24 +121,7 @@
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  #cssmenu ul ul li a {
-    padding: 14px 22px;
-    cursor: pointer;
-    z-index: 2;
-    font-size: 14px;
-    text-decoration: none;
-    color: #dddddd;
-    background: #49505a;
-    -webkit-transition: color .2s ease;
-    -o-transition: color .2s ease;
-    transition: color .2s ease;
-  }
-  #cssmenu ul ul ul li a {
-    padding-left: 32px;
-  }
-  #cssmenu ul ul li a:hover {
-    color: #ffffff;
-  }
+
   #cssmenu ul ul > li.has-sub > a:after {
     top: 16px;
     right: 26px;
@@ -111,20 +131,20 @@
     top: 20px;
     background: #dddddd;
   }
-
-
-
+  .displayClass{
+    display:block !important;
+  }
 </style>
 
 <template>
     <div class="mainLeft" id="cssmenu">
         <ul class="navBar">
-          <li v-repeat="option in options" v-on="click:expandList">
+          <li v-repeat="option in options" v-on="click:expandList" v-class="has-sub:option.child">
             <a href={{option.url}}>{{option.name}}</a>
             <ul v-if="option.child">
-                <li v-repeat="child in option.child">
+                <li v-repeat="child in option.child" v-class="has-sub:child.parChild">
                     <a href={{child.url}}>{{child.name}}</a>
-                     <ul v-if="child.parChild">
+                     <ul v-if="child.parChild" v-show="false">
                        <li v-repeat="parChild in child.parChild">
                           <a href={{parChild.url}}>{{parChild.name}}</a>
                        </li>
@@ -140,7 +160,16 @@
     module.exports = {
         methods:{
             expandList:function(e){
-                e.target.css('display','none');
+                e.stopPropagation();
+                e=e.target;
+               var self = $(e).parent('li');
+               if(!self.hasClass('has-sub'))
+                    return;
+               var ulTemp = self.find('ul');
+               if(ulTemp.hasClass('displayClass'))
+                  ulTemp.removeClass('displayClass');
+               else
+                  self.find('ul').addClass('displayClass');
             }
         },
         data:function(){
@@ -153,6 +182,7 @@
                     {
                         'name':'buyPos',
                         'url':'#buyPos',
+                        'isOpen':true,
                         'child':[
                            {
                               'name':'child1',
