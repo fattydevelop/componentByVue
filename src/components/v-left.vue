@@ -17,12 +17,12 @@
   }
   #cssmenu {
     width: 220px;
-
     color: #ffffff;
   }
   #cssmenu ul ul {
     display: none;
   }
+
 
   .align-right {
     float: right;
@@ -131,9 +131,9 @@
     top: 20px;
     background: #dddddd;
   }
-  .displayClass{
-    display:block !important;
-  }
+  #cssmenu ul ul ul{
+      color: red;
+    }
 </style>
 
 <template>
@@ -142,9 +142,9 @@
           <li v-repeat="option in options" v-on="click:expandList" v-class="has-sub:option.child">
             <a href={{option.url}}>{{option.name}}</a>
             <ul v-if="option.child">
-                <li v-repeat="child in option.child" v-class="has-sub:child.parChild">
+                <li v-repeat="child in option.child"  v-class="has-sub:child.parChild">
                     <a href={{child.url}}>{{child.name}}</a>
-                     <ul v-if="child.parChild" v-show="false">
+                     <ul v-if="child.parChild">
                        <li v-repeat="parChild in child.parChild">
                           <a href={{parChild.url}}>{{parChild.name}}</a>
                        </li>
@@ -160,16 +160,20 @@
     module.exports = {
         methods:{
             expandList:function(e){
-                e.stopPropagation();
-                e=e.target;
+               e.stopPropagation();
+               e=e.target;
                var self = $(e).parent('li');
                if(!self.hasClass('has-sub'))
                     return;
-               var ulTemp = self.find('ul');
-               if(ulTemp.hasClass('displayClass'))
-                  ulTemp.removeClass('displayClass');
-               else
-                  self.find('ul').addClass('displayClass');
+               var ulTemp = $(self.find('ul')[0]);
+               if(self.hasClass('open')){
+                  ulTemp.slideUp(200);
+                  self.removeClass('open');
+               }
+               else{
+                  ulTemp.slideDown(200);
+                  self.addClass('open');
+               }
             }
         },
         data:function(){
