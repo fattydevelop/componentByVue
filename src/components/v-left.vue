@@ -17,7 +17,7 @@
   }
   #cssmenu {
     width: 220px;
-    color: #ffffff;
+    color: @menuFont;
   }
   #cssmenu ul ul {
     display: none;
@@ -36,14 +36,14 @@
                 z-index: 2;
                 font-size: 16px;
                 text-decoration: none;
-                color: #ffffff;
-                background: #3ab4a6;
+                color: @menuChildFont;
+                background: @menuBackground;
                 -webkit-transition: color .2s ease;
                 -o-transition: color .2s ease;
                 transition: color .2s ease;
             }
             a:hover{
-                 color: #d8f3f0;
+                 color: @menuFontHover;
             }
             a:active{
                 ul{
@@ -61,7 +61,7 @@
                         font-size: 14px;
                         text-decoration: none;
                         color: #dddddd;
-                        background: #49505a;
+                        background: @menuChildBackgound;
                         -webkit-transition: color .2s ease;
                         -o-transition: color .2s ease;
                         transition: color .2s ease;
