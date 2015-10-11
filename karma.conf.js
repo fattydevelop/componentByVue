@@ -15,7 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/*_test.js'
+        'src/*.js',
+        'src/**/*.js',
+        'test/*_test.js'
     ],
 
 
@@ -23,11 +25,21 @@ module.exports = function(config) {
     exclude: [
     ],
 
+    webpack:{
+      module: {
+        loaders: [
+          { test: /\.vue$/, loader: 'vue' },
+          { test:/\.less$/, loader: 'style!css!less' }
+        ]
+      }
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*_test.js':['webpack']
+      'src/*.js':['webpack'],
+      'src/**/*.vue':['webpack'],
+      'test/*.js':['webpack']
     },
 
 

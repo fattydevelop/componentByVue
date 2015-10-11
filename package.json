@@ -10,6 +10,7 @@
     "karma-mocha": "latest",
     "karma-spec-reporter": "^0.0.20",
     "karma-webpack": "^1.7.0",
+    "karma-commonjs":"latest",
     "assert":"^1.3.0",
     "less-loader": "^2.2.1",
     "node-libs-browser": "^0.5.2",

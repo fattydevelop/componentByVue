@@ -22,8 +22,6 @@
   #cssmenu ul ul {
     display: none;
   }
-
-
   .align-right {
     float: right;
   }
@@ -51,7 +49,6 @@
                 }
             }
         }
-
         ul{
             li{
                 a{
@@ -80,7 +77,6 @@
         }
     }
   }
-
   #cssmenu ul > li.has-sub > a:after {
     position: absolute;
     right: 26px;
@@ -112,7 +108,6 @@
     -o-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
   }
-
   #cssmenu ul > li.has-sub.open > a:after,
   #cssmenu ul > li.has-sub.open > a:before {
     -webkit-transform: rotate(45deg);
@@ -121,7 +116,6 @@
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-
   #cssmenu ul ul > li.has-sub > a:after {
     top: 16px;
     right: 26px;
@@ -186,7 +180,6 @@
                     {
                         'name':'buyPos',
                         'url':'#buyPos',
-                        'isOpen':true,
                         'child':[
                            {
                               'name':'child1',
